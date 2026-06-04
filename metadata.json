@@ -1,0 +1,8 @@
+{
+  "name": "PetLog",
+  "description": "반려동물 지출 관리 및 자동 분석 서비스",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": []
+}

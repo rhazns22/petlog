@@ -1,0 +1,129 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('https://cdn.jsdelivr.net/gh/toss/tossface@latest/dist/tossface.css');
+@import "tailwindcss";
+
+
+
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, "Tossface", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 32px;
+}
+
+@layer base {
+  :root {
+    --background: #F8FAF9;
+    --foreground: #191F28;
+    --primary: #12B886;
+    --secondary: #20C997;
+    --deep-green-black: #191F28;
+    --soft-gray: #8B95A1;
+    --warning: #FFB020;
+    --error: #F04452;
+    --card-bg: #FFFFFF;
+    
+    --toss-blue: #12B886; /* Legacy support */
+    --toss-gray-100: #F2F4F6;
+    --toss-gray-200: #E5E8EB;
+    --toss-gray-300: #D1D6DB;
+    --toss-gray-400: #ADB5BD;
+    --toss-gray-500: #8B95A1;
+    --toss-gray-600: #4E5968;
+    --toss-gray-700: #333D4B;
+    --toss-gray-800: #191F28;
+    color-scheme: light !important;
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] transition-colors duration-300;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .toss-card {
+    @apply bg-white rounded-[28px] p-6 shadow-[0_4px_20px_rgba(11,47,42,0.04)] border border-[#F2F4F6] transition-all duration-200;
+  }
+
+  .toss-button-primary {
+    @apply bg-[#12B886] text-white font-black py-4 px-6 rounded-[20px] active:scale-[0.98] transition-all shadow-[0_4px_12px_rgba(18,184,134,0.2)] disabled:bg-[#ADB5BD] disabled:shadow-none disabled:cursor-not-allowed flex items-center justify-center gap-2;
+  }
+
+  .toss-button-secondary {
+    @apply bg-[#E9FBF5] text-[#12B886] font-black py-4 px-6 rounded-[20px] active:scale-[0.98] transition-all disabled:bg-[#F2F4F6] disabled:text-[#ADB5BD] disabled:cursor-not-allowed flex items-center justify-center gap-2;
+  }
+
+  .premium-card {
+    @apply bg-white rounded-[28px] shadow-[0_8px_30px_rgba(11,47,42,0.06)] transition-all duration-300 border-none;
+  }
+
+  .glass-morphism {
+    @apply bg-white/80 backdrop-blur-xl;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#12B886] to-[#20C997];
+  }
+
+  .badge-primary {
+    @apply bg-[#E9FBF5] text-[#12B886] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#12B886]/10;
+  }
+
+  .badge-warning {
+    @apply bg-[#FFFBEB] text-[#FFB020] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#FFB020]/10;
+  }
+
+  .badge-error {
+    @apply bg-[#FEF2F2] text-[#F04452] text-[10px] font-black px-2 py-0.5 rounded-full border border-[#F04452]/10;
+  }
+
+  .info-banner {
+    @apply bg-[#E9FBF5] border border-[#12B886]/10 rounded-2xl p-4 flex items-start gap-3;
+  }
+
+  .warning-banner {
+    @apply bg-[#FFFBEB] border border-[#FFB020]/10 rounded-2xl p-4 flex items-start gap-3;
+  }
+
+  .feedback-button {
+    @apply fixed bottom-24 right-4 z-[40] w-12 h-12 bg-[#0B2F2A] text-white rounded-full flex items-center justify-center shadow-lg active:scale-95 transition-all;
+  }
+}
+
+
+
+/* Recharts Focus Outline & Tap Highlight Fix */
+.recharts-wrapper:focus,
+.recharts-surface:focus,
+.recharts-sector:focus,
+.recharts-curve:focus,
+.recharts-bar-rectangle:focus,
+.recharts-rectangle:focus,
+.recharts-layer:focus {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+svg:focus, path:focus, g:focus {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Global Tap Highlight Fix for Mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+

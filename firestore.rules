@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // 1. 시스템 로그 (기록만 허용, 조회는 본인 것만 혹은 차단)
+    match /system_logs/{logId} {
+      allow create: if true; // 서비스 안정성을 위해 기록은 허용
+      allow read, update, delete: if false; // 아무도 읽거나 지울 수 없음
+    }
+
+    // 2. 비용 최적화 캐시 (로그인한 사용자만 이용 가능)
+    match /receipt_cache/{hash} {
+      allow read, write: if isSignedIn();
+    }
+
+    // 3. AI 피드백 (본인 데이터 기여만 가능, 조회는 차단)
+    match /ai_feedback/{id} {
+      allow create: if isSignedIn();
+      allow read, update, delete: if false; 
+    }
+
+    // 4. 사용자 데이터 (본인의 것만 완벽하게 격리)
+    match /users/{userId}/{allPaths=**} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+    
+    match /users/{userId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // 5. 전역 설정 (모두 읽기 가능하지만 수정은 불가)
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // 기본적으로 모든 접근 차단 (Default Deny)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
