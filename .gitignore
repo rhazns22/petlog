@@ -1,0 +1,23 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+npm-debug.log*
+.env*
+!.env.example
+
+# Vercel & Vite Caches
+.vercel/
+.vite/
+.cache/
+
+# Firebase Service Keys
+serviceAccountKey.json
+firebase-adminsdk.json
+google-service-account.json
+
+# Temporary Scripts
+apply_app_ux_*.cjs
+apply_radius_*.cjs
